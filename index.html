@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retaining Wall Calculator - Free Cost Estimator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        @media print {
+            .no-print { display: none !important; }
+            .print-break { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-8 px-4">
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto mb-8 no-print">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-2">
+            Retaining Wall Calculator
+        </h1>
+        <p class="text-gray-600 text-center">
+            Get instant cost estimates for your retaining wall project
+        </p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Input Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 print-break">
+                <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    Project Details
+                </h2>
+
+                <form id="calculatorForm" class="space-y-6">
+                    <!-- Wall Length -->
+                    <div>
+                        <label for="length" class="block text-sm font-medium text-gray-700 mb-2">
+                            Wall Length (feet)
+                        </label>
+                        <div class="relative">
+                            <input type="number"
+                                   id="length"
+                                   step="0.1"
+                                   min="1"
+                                   class="w-full pr-16 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none"
+                                   placeholder="Enter wall length"
+                                   style="-moz-appearance: textfield;">
+                            <span class="absolute right-10 top-3.5 text-gray-500 text-sm pointer-events-none">ft</span>
+                            <style>
+                                input[type=number]::-webkit-outer-spin-button,
+                                input[type=number]::-webkit-inner-spin-button {
+                                    opacity: 1;
+                                    height: 40px;
+                                }
+                                input[type=number]::-moz-number-spin-box {
+                                    opacity: 1;
+                                }
+                            </style>
+                        </div>
+                    </div>
+
+                    <!-- Wall Height -->
+                    <div>
+                        <label for="height" class="block text-sm font-medium text-gray-700 mb-2">
+                            Wall Height (feet)
+                        </label>
+                        <div class="relative">
+                            <input type="number"
+                                   id="height"
+                                   step="0.1"
+                                   min="1"
+                                   class="w-full pr-16 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none"
+                                   placeholder="Enter wall height"
+                                   style="-moz-appearance: textfield;">
+                            <span class="absolute right-10 top-3.5 text-gray-500 text-sm pointer-events-none">ft</span>
+                        </div>
+                    </div>
+
+                    <!-- Material Type -->
+                    <div>
+                        <label for="material" class="block text-sm font-medium text-gray-700 mb-2">
+                            Material Type
+                        </label>
+                        <select id="material"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            <option value="">Select material...</option>
+                            <option value="blocks">Standard Cinder Blocks (8"x16") - $15/sq ft</option>
+                            <option value="decorative">Decorative Concrete Blocks - $25/sq ft</option>
+                            <option value="corten">Corten Steel (Metal) - $40/sq ft</option>
+                            <option value="railroad">Railroad Ties (Wood) - $20/sq ft</option>
+                            <option value="boulders">Natural Boulders - $25/sq ft</option>
+                            <option value="poured">Poured Concrete - $30/sq ft</option>
+                        </select>
+                    </div>
+
+                    <!-- Include Labor Cost -->
+                    <div class="flex items-center">
+                        <input type="checkbox"
+                               id="labor"
+                               class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="labor" class="ml-3 text-gray-700">
+                            Include Labor Cost (+$50/sq ft)
+                        </label>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        Calculate Estimate
+                    </button>
+                </form>
+            </div>
+
+            <!-- Output Section -->
+            <div id="results" class="hidden">
+                <!-- Cost Estimate Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6 print-break">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Cost Estimate
+                    </h2>
+
+                    <div class="text-center mb-6">
+                        <p class="text-sm text-gray-600 mb-2">Estimated Total Cost</p>
+                        <div class="text-4xl font-bold text-blue-600" id="costRange">
+                            $0 - $0
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">
+                            Based on <span id="totalArea">0</span> sq ft
+                        </p>
+                    </div>
+
+                    <!-- Material & Labor Breakdown -->
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-sm text-gray-600">Material Cost</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="materialCost">$0</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-sm text-gray-600">Labor Cost</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="laborCost">$0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Materials Breakdown Card -->
+                <div id="materialsBreakdown" class="bg-white rounded-xl shadow-lg p-6 mb-6 print-break hidden">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                        Materials Needed
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-gray-700">Blocks Required</span>
+                            <span class="font-semibold text-gray-900" id="blocksNeeded">0</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-gray-700">Gravel Backfill</span>
+                            <span class="font-semibold text-gray-900" id="gravelVolume">0 cu yd</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-gray-700">Gravel Weight</span>
+                            <span class="font-semibold text-gray-900" id="gravelWeight">0 tons</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Print Button -->
+                <div class="no-print">
+                    <button onclick="window.print()"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                        </svg>
+                        Print / Save Estimate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Initial Message -->
+            <div id="placeholder" class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-gray-500">
+                <svg class="w-16 h-16 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <p class="text-center">Fill in the project details to see your cost estimate</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto mt-12 text-center text-sm text-gray-600 no-print">
+        <p class="mb-2">Prices are estimates and may vary based on location, material quality, and project complexity.</p>
+        <p>Always consult with local contractors for accurate pricing.</p>
+    </footer>
+
+    <script>
+        // Material prices configuration
+        const materialPrices = {
+            blocks: 15,      // Standard Cinder Blocks
+            decorative: 25,  // Decorative Concrete Blocks
+            corten: 40,      // Corten Steel
+            railroad: 20,    // Railroad Ties
+            boulders: 25,    // Natural Boulders
+            poured: 30       // Poured Concrete
+        };
+
+        const laborCostPerSqFt = 50;
+        const blockArea = 0.89; // sq ft per block (8"x16" = 0.89 sq ft)
+        const wasteFactor = 1.05; // 5% waste factor
+        const gravelDepth = 1; // ft
+        const tonsPerCubicYard = 1.4;
+
+        // Form submission handler
+        document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateEstimate();
+        });
+
+        function calculateEstimate() {
+            // Get input values
+            const length = parseFloat(document.getElementById('length').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const material = document.getElementById('material').value;
+            const includeLabor = document.getElementById('labor').checked;
+
+            // Validate inputs
+            if (!length || !height || !material) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Calculate area
+            const totalArea = length * height;
+
+            // Get material price
+            const materialPrice = materialPrices[material];
+
+            // Calculate costs
+            const materialTotal = materialPrice * totalArea;
+            const laborTotal = includeLabor ? laborCostPerSqFt * totalArea : 0;
+            const baseTotal = materialTotal + laborTotal;
+
+            // Calculate cost range (90% to 110%)
+            const minTotal = baseTotal * 0.9;
+            const maxTotal = baseTotal * 1.1;
+
+            // Display results
+            displayResults({
+                totalArea: totalArea,
+                minCost: minTotal,
+                maxCost: maxTotal,
+                materialCost: materialTotal,
+                laborCost: laborTotal,
+                material: material,
+                height: height
+            });
+        }
+
+        function displayResults(data) {
+            // Hide placeholder, show results
+            document.getElementById('placeholder').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+
+            // Format currency
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(amount);
+            };
+
+            // Update cost estimate
+            document.getElementById('costRange').textContent =
+                `${formatCurrency(data.minCost)} - ${formatCurrency(data.maxCost)}`;
+
+            document.getElementById('totalArea').textContent =
+                `${data.totalArea.toFixed(1)}`;
+
+            document.getElementById('materialCost').textContent =
+                formatCurrency(data.materialCost);
+
+            document.getElementById('laborCost').textContent =
+                formatCurrency(data.laborCost);
+
+            // Show materials breakdown for block materials
+            if (data.material === 'blocks' || data.material === 'decorative') {
+                showMaterialsBreakdown(data);
+            } else {
+                document.getElementById('materialsBreakdown').classList.add('hidden');
+            }
+        }
+
+        function showMaterialsBreakdown(data) {
+            const materialsBreakdown = document.getElementById('materialsBreakdown');
+            materialsBreakdown.classList.remove('hidden');
+
+            // Calculate blocks needed with waste factor
+            const blocksNeeded = Math.ceil((data.totalArea / blockArea) * wasteFactor);
+
+            // Calculate gravel backfill
+            const gravelVolume = (data.totalArea * gravelDepth) / 27; // Convert to cubic yards
+            const gravelWeight = gravelVolume * tonsPerCubicYard;
+
+            // Update display
+            document.getElementById('blocksNeeded').textContent =
+                `${blocksNeeded.toLocaleString()} blocks`;
+
+            document.getElementById('gravelVolume').textContent =
+                `${gravelVolume.toFixed(1)} cu yd`;
+
+            document.getElementById('gravelWeight').textContent =
+                `${gravelWeight.toFixed(1)} tons`;
+        }
+
+        // Real-time calculation on input change
+        ['length', 'height', 'material', 'labor'].forEach(id => {
+            const element = document.getElementById(id);
+            element.addEventListener('change', () => {
+                if (document.getElementById('length').value &&
+                    document.getElementById('height').value &&
+                    document.getElementById('material').value) {
+                    calculateEstimate();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
