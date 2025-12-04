@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://your-domain.pages.dev/sitemap.xml
+
+# Block unnecessary paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /_error
