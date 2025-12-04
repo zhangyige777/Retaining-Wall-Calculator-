@@ -1,0 +1,26 @@
+{
+  "name": "wallestimate-pro",
+  "version": "1.0.0",
+  "description": "Professional Retaining Wall Cost Calculator and Estimation Platform",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start",
+    "generate": "node scripts/generate-pages.js",
+    "deploy": "npm run build && npm run deploy-static"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.8.0",
+    "date-fns": "^2.30.0",
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
+  }
+}
